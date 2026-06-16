@@ -1,6 +1,6 @@
 ---
 title: "ScreenAI"
-thumbnail: "/images/projects/Workflow sistem.png" 
+thumbnail: "/images/projects/Workflow sistem.png"
 category: "NLP / Full-stack"
 summary: "AI recruitment screening that ranks candidates against a rubric—fairly, and with an evidence-based reason behind every score. Capstone project, 440 CVs, production fork deployed at MBC Laboratory."
 featured: true
@@ -18,6 +18,43 @@ results: |
   - Blind screening eliminates identity bias before scoring.
   - Every score includes cited evidence from the CV for recruiter trust.
 role: "Team of 4 — contributed to AI pipeline architecture, NER anonymization, RAG integration, and prompt engineering."
+architecture: |
+  ┌─────────────────────┐
+  │  PDF Upload         │
+  └─────────┬───────────┘
+            ▼
+  ┌─────────────────────┐
+  │  PyMuPDF Extraction │
+  └─────────┬───────────┘
+            ▼
+  ┌─────────────────────────────┐
+  │  NER Anonymization          │  ◄── IndoBERT fine-tuned
+  │  + Regex Fallback           │      on Indonesian NER
+  └─────────┬───────────────────┘
+            ▼
+  ┌─────────────────────────────┐
+  │  Rubric Embedding           │  ◄── ChromaDB vector store
+  │  + RAG Retrieval            │
+  └─────────┬───────────────────┘
+            ▼
+  ┌─────────────────────────────┐
+  │  DeepSeek V3 LLM            │  ◄── Structured JSON scoring
+  │  Scoring + Evidence         │      with retry logic
+  └─────────┬───────────────────┘
+            ▼
+  ┌─────────────────────────────┐
+  │  Dashboard                  │  ◄── React + Vite + Tailwind
+  │  Ranking + Score Override   │
+  └─────────────────────────────┘
+decisions: |
+  - IndoBERT + Regex both needed: NER models miss phone numbers, emails, and NIK/ID numbers. IndoBERT handles Indonesian names, organizations, and locations. Regex fallback catches structured patterns. Together they achieve reliable blind screening.
+  - ChromaDB for rubric embeddings: Rubrics are small (5-10 dimensions), so ChromaDB's local, file-based vector store is ideal. No external service dependency. Embeddings use sentence-transformers/all-MiniLM-L6-v2 for lightweight, multilingual support.
+  - Structured JSON + retry logic: The scoring prompt enforces a strict JSON schema. Backend parses the response, validates against Zod schemas, and retries (up to 3 attempts) with increasingly strict prompts if parsing fails. Temperature = 0 for deterministic output.
+  - Production fork at MBC Lab: After the capstone, a fork of ScreenAI was deployed internally at MBC Laboratory to support assistant recruitment. The system handles real CV uploads and rubric-based ranking for the lab's selection process.
+lessons: |
+  - Layered anonymization is non-negotiable: Model-based NER alone lets pattern-based PII slip through. Regex fallback is essential for production use.
+  - LLM output needs guardrails: Without JSON schema enforcement and retry logic, even capable models produce unusable output ~10% of the time.
+  - Users value speed over features: The first UI had too many options. Recruiters used exactly three flows (upload, dashboard, detail). The redesign stripped everything else.
 stack:
   - "FastAPI"
   - "React"
@@ -31,18 +68,3 @@ links:
   github: "https://github.com/istgrudd/screenai"
   demo: "#"
 ---
-
-## Architecture
-
-```text
-CV Upload → NER Anonymization (IndoBERT) → RAG Scoring (LangChain)
-                                                  ↓
-Recruiter Dashboard ← XAI Justifications ← ChromaDB (rubric embeddings)
-```
-
-## Key Features
-
-- **Blind Screening:** NER-based PII stripping before any scoring.
-- **Competency Match:** RAG grounds ranking in recruiter-defined rubric dimensions.
-- **Explainable AI:** Every score is backed by cited CV evidence, not black-box magic.
-- **Production Deployment:** A fork of ScreenAI is deployed at MBC Laboratory for internal use.

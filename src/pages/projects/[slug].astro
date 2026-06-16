@@ -116,6 +116,30 @@ const pageDesc = data.summary;
       </div>
     )}
 
+    <!-- Architecture -->
+    {data.architecture && (
+      <div class="mt-8 border-t border-gray-200/60 pt-6 dark:border-gray-800/60">
+        <h2 class="text-lg font-bold">Architecture</h2>
+        <div class="prose-custom mt-2 leading-relaxed text-gray-600 dark:text-gray-300 whitespace-pre-line">{data.architecture}</div>
+      </div>
+    )}
+
+    <!-- Technical Decisions -->
+    {data.decisions && (
+      <div class="mt-8 border-t border-gray-200/60 pt-6 dark:border-gray-800/60">
+        <h2 class="text-lg font-bold">Technical Decisions</h2>
+        <div class="prose-custom mt-2 leading-relaxed text-gray-600 dark:text-gray-300 whitespace-pre-line">{data.decisions}</div>
+      </div>
+    )}
+
+    <!-- Lessons -->
+    {data.lessons && (
+      <div class="mt-8 border-t border-gray-200/60 pt-6 dark:border-gray-800/60">
+        <h2 class="text-lg font-bold">Lessons</h2>
+        <div class="prose-custom mt-2 leading-relaxed text-gray-600 dark:text-gray-300 whitespace-pre-line">{data.lessons}</div>
+      </div>
+    )}
+
     <!-- Extended body content (from markdown) -->
     {body && (
       <div class="prose-custom prose mt-8 border-t border-gray-200/60 pt-6 dark:border-gray-800/60 dark:prose-invert max-w-none">

@@ -12,6 +12,9 @@ const projects = defineCollection({
     approach: z.string().optional(),
     results: z.string().optional(),
     role: z.string().optional(),
+    architecture: z.string().optional(),
+    decisions: z.string().optional(),
+    lessons: z.string().optional(),
     stack: z.array(z.string()).default([]),
     links: z
       .object({
