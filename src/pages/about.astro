@@ -1,0 +1,174 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+import { PERSONAL, TECH_STACK, LEADERSHIP } from "../lib/constants";
+---
+
+<BaseLayout
+  title="About"
+  description="Rudi Firdaus — ML / AI Engineer bridging research and production. First-author IEEE publication, self-hosted AI platform, and leadership at MBC Laboratory."
+>
+  <section class="mx-auto max-w-3xl px-4 pb-16 pt-16 sm:px-6 sm:pt-24">
+    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">About</h1>
+
+    <!-- Bio -->
+    <div class="mt-10 max-w-2xl">
+      <h2 class="text-xl font-bold">Bio</h2>
+      <div class="mt-4 space-y-4 leading-relaxed text-gray-600 dark:text-gray-300">
+        <p>
+          I&rsquo;m Rudi Firdaus, an ML / AI Engineer based in Yogyakarta, Indonesia. My work sits at the intersection of computer vision, NLP, and production ML systems. What drives me: taking research beyond the notebook and into systems people actually use.
+        </p>
+        <p>
+          I published my first IEEE paper as a first author during my undergraduate studies—a vehicle detection system using YOLOv11 trained on Indonesian traffic data. That work became the foundation for my ongoing thesis on traffic flow estimation under low-visibility conditions.
+        </p>
+        <p>
+          On the engineering side, I built ScreenAI: a full-stack AI recruitment screening platform with RAG-based scoring, NER anonymization, and an explainable dashboard—self-hosted on a VPS and used by 40+ testers in staging. It spans FastAPI, LangChain, IndoBERT, ChromaDB, and React.
+        </p>
+        <p>
+          I believe the best ML engineers are comfortable at both ends of the stack: understanding the math behind the model <em>and</em> knowing how to containerize it, expose an API, and ship it. That&rsquo;s the kind of engineer I&rsquo;m building toward.
+        </p>
+      </div>
+    </div>
+
+    <!-- Leadership -->
+    <div class="mt-12">
+      <h2 class="text-xl font-bold">Leadership</h2>
+      <div class="mt-4 rounded-xl border border-gray-200/60 bg-gray-50/50 p-6 dark:border-gray-800/60 dark:bg-gray-900/30">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h3 class="font-semibold">{LEADERSHIP.role}</h3>
+          <span class="text-sm text-gray-400">{LEADERSHIP.period}</span>
+        </div>
+        <ul class="mt-4 space-y-2">
+          {LEADERSHIP.highlights.map((item) => (
+            <li class="flex items-start gap-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-500"></span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="mt-12">
+      <h2 class="text-xl font-bold">Skills</h2>
+      <div class="mt-4 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-gray-400">Languages</h3>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            {TECH_STACK.languages.map((item) => (
+              <span class="rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">{item}</span>
+            ))}
+          </div>
+        </div>
+        <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-gray-400">ML / DL</h3>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            {TECH_STACK.mlDl.map((item) => (
+              <span class="rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">{item}</span>
+            ))}
+          </div>
+        </div>
+        <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-gray-400">MLOps & Infra</h3>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            {TECH_STACK.mlOpsInfra.map((item) => (
+              <span class="rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">{item}</span>
+            ))}
+          </div>
+        </div>
+        <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-gray-400">Full-stack</h3>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            {TECH_STACK.fullstack.map((item) => (
+              <span class="rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">{item}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="mt-12">
+      <h2 class="text-xl font-bold">Journey</h2>
+      <div class="mt-6 space-y-0">
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <div class="h-3 w-3 rounded-full bg-accent-500"></div>
+            <div class="h-full w-px bg-gray-200 dark:bg-gray-800"></div>
+          </div>
+          <div class="pb-8">
+            <span class="text-sm text-gray-400">2026</span>
+            <h3 class="font-semibold">Thesis — Traffic Flow Estimation</h3>
+            <p class="mt-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+              Ongoing undergraduate thesis extending IEEE paper work to full traffic flow estimation using YOLOv26 + ByteTrack, compliant with Indonesian PKJI standards.
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <div class="h-3 w-3 rounded-full bg-accent-500"></div>
+            <div class="h-full w-px bg-gray-200 dark:bg-gray-800"></div>
+          </div>
+          <div class="pb-8">
+            <span class="text-sm text-gray-400">2025</span>
+            <h3 class="font-semibold">ScreenAI — Full-stack AI in Production</h3>
+            <p class="mt-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+              Built and deployed AI recruitment screening system with 40+ testers. RAG + NER + FastAPI + React, self-hosted on VPS.
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <div class="h-3 w-3 rounded-full bg-accent-500"></div>
+            <div class="h-full w-px bg-gray-200 dark:bg-gray-800"></div>
+          </div>
+          <div class="pb-8">
+            <span class="text-sm text-gray-400">2025</span>
+            <h3 class="font-semibold">IEEE Publication — First Author</h3>
+            <p class="mt-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+              Published vehicle detection paper in IEEE Xplore. First-author contribution with custom Indonesian traffic dataset.
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <div class="h-3 w-3 rounded-full bg-accent-500"></div>
+            <div class="h-full w-px bg-gray-200 dark:bg-gray-800"></div>
+          </div>
+          <div class="pb-8">
+            <span class="text-sm text-gray-400">2025</span>
+            <h3 class="font-semibold">Dolanan Data — National Finalist</h3>
+            <p class="mt-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+              Swin-FPN semantic segmentation for UAV post-flood mapping. National-level competition finalist.
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <div class="h-3 w-3 rounded-full bg-accent-500"></div>
+            <div class="h-full w-px bg-gray-200 dark:bg-gray-800"></div>
+          </div>
+          <div class="pb-8">
+            <span class="text-sm text-gray-400">2025</span>
+            <h3 class="font-semibold">Dolanan Data Semifinalist</h3>
+            <p class="mt-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+              Face spoofing detection with CLIP ViT-L-14 and Focal Loss. Semi-finalist in national data science competition.
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <div class="h-3 w-3 rounded-full bg-accent-500"></div>
+          </div>
+          <div class="pb-4">
+            <span class="text-sm text-gray-400">2024–2025</span>
+            <h3 class="font-semibold">Vice Coordinator — MBC Laboratory</h3>
+            <p class="mt-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+              Managed research infrastructure and internal tooling for 40+ lab members. Organized company visit to IBM Indonesia.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import { SITE, PERSONAL } from "../lib/constants";
+---
+
+<script type="application/ld+json" set:html={`{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "${PERSONAL.name}",
+  "jobTitle": "${PERSONAL.role}",
+  "url": "${SITE.url}",
+  "sameAs": [
+    "${PERSONAL.links.github}",
+    "${PERSONAL.links.linkedin}"
+  ],
+  "description": "${SITE.description}",
+  "image": "${SITE.url}/images/profile.jpg"
+}`} />
