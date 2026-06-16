@@ -1,5 +1,6 @@
 ---
 title: "ScreenAI"
+thumbnail: "/images/projects/Workflow sistem.png" 
 category: "NLP / Full-stack"
 summary: "AI recruitment screening that ranks candidates against a rubric—fairly, and with an evidence-based reason behind every score. Capstone project, 440 CVs, production fork deployed at MBC Laboratory."
 featured: true
@@ -27,7 +28,7 @@ stack:
   - "LLM"
   - "Tailwind CSS"
 links:
-  github: "#"
+  github: "https://github.com/istgrudd/screenai"
   demo: "#"
 ---
 

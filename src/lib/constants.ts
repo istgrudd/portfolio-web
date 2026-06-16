@@ -78,8 +78,8 @@ export const RESEARCH = {
       gpu: "NVIDIA RTX 4090",
     },
     links: {
-      doi: "#",
-      ieee: "#",
+      doi: "https://doi.org/10.1109/ICSINTESA68165.2025.11413760",
+      ieee: "https://ieeexplore.ieee.org/document/11413760",
     },
   },
   thesis: {
