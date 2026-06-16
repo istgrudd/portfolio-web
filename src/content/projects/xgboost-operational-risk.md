@@ -20,5 +20,5 @@ stack:
   - "Pandas"
   - "Python"
 links:
-  github: "#"
+  github: "https://github.com/istgrudd/sdpi-analisis_risiko_operasional"
 ---

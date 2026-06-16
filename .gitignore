@@ -29,3 +29,5 @@ _paper*.txt
 
 # Misc
 *.log
+
+./PRD.md
