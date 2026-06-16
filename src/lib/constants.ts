@@ -30,6 +30,37 @@ export const NAV_LINKS = [
   { label: "About", href: "/about" },
 ];
 
+export const COAUTHORED_PUBLICATIONS = [
+  {
+    title: "Comparative Study of Enhanced Deep Learning Models for Cervical Pap Smear Cell Segmentation",
+    venue: "Submitted for publication",
+    year: 2026,
+    role: "Co-author (4th of 6)",
+    abstract:
+      "A strictly fair comparative benchmark of four deep learning architectures (U-Net, U-Net++, Swin-UNet, SegNet) for cervical cell semantic segmentation on the Herlev dataset. Swin-UNet achieved the highest performance (F1: 0.8868 ± 0.0027; IoU: 0.7974 ± 0.0043), with statistical significance confirmed via one-way ANOVA and Bonferroni-corrected pairwise t-tests.",
+    coauthors: [
+      "Fadly Huwaiza Khalid",
+      "Muhammad Daffa Izzati",
+      "Akmal Yaasir Fauzaan",
+      "William Eka Chandra",
+      "Naufal Hanan Lutfianto",
+    ],
+  },
+  {
+    title: "Deep Learning-Based Resource Allocation for Visible Light Communication Networks",
+    venue: "Submitted for publication",
+    year: 2026,
+    role: "Co-author (4th of 4)",
+    abstract:
+      "VLC-Net: A supervised deep learning framework for real-time resource allocation in multi-cell visible light communication networks employing NOMA. A feedforward DNN with Bayesian-optimized architecture achieves 388× speedup over iterative solvers and 66% improvement in Jain's fairness index.",
+    coauthors: [
+      "Marcelia Chintya Hartakaadi",
+      "Aminah Indahsari Marsuki",
+      "Intan Nisa Bani",
+    ],
+  },
+];
+
 export const RESEARCH = {
   paper: {
     title: "Optimizing YOLOv11 for Vehicle Detection in Low-Visibility CCTV Footage",

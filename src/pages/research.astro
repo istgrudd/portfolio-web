@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../components/BaseLayout.astro";
-import { RESEARCH, SITE } from "../lib/constants";
+import { RESEARCH, SITE, COAUTHORED_PUBLICATIONS } from "../lib/constants";
 ---
 
 <BaseLayout
@@ -150,6 +150,36 @@ import { RESEARCH, SITE } from "../lib/constants";
         <a href="/projects/traffic-flow-estimation" class="inline-flex items-center gap-1 text-sm font-medium text-accent-600 hover:underline dark:text-accent-400">
           View project details <span>&rarr;</span>
         </a>
+      </div>
+    </div>
+
+    <!-- Other Publications -->
+    <hr class="my-16 border-gray-200/60 dark:border-gray-800/60" />
+
+    <div>
+      <h2 class="text-xl font-bold tracking-tight">Other Publications</h2>
+      <p class="mt-3 text-sm text-gray-500 dark:text-gray-400">
+        Co-authored contributions to research spanning medical imaging and wireless communications.
+      </p>
+
+      <div class="mt-6 grid gap-6 sm:grid-cols-2">
+        {COAUTHORED_PUBLICATIONS.map((pub) => (
+          <div class="rounded-xl border border-gray-200/60 bg-gray-50/50 p-6 dark:border-gray-800/60 dark:bg-gray-900/30">
+            <div class="flex items-center gap-2">
+              <span class="rounded-full bg-gray-200 px-2 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+                {pub.year}
+              </span>
+              <span class="text-xs text-gray-400">{pub.role}</span>
+            </div>
+            <h3 class="mt-3 font-semibold leading-snug">{pub.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+              {pub.abstract}
+            </p>
+            <p class="mt-3 text-xs text-gray-400">
+              Co-authors: {pub.coauthors.join(", ")}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
 

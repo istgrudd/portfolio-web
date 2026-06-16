@@ -23,6 +23,9 @@ Thumbs.db
 # Portfolio assets (sensitive / not tracked)
 Portfolio*.pdf
 2025*.pdf
+m52630*.pdf
+m70908*.pdf
+_paper*.txt
 
 # Misc
 *.log
