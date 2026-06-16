@@ -86,8 +86,11 @@ links:                             # "#" atau dikosongkan = tombol disembunyikan
 
 Aturan:
 - Path **selalu diawali `/`** dan **tanpa `public/`** (mis. `/images/projects/x.png`, bukan `public/images/...`).
-- **Hindari spasi** di nama file (pakai `nama-file.png`, bukan `Nama File.png`).
-- Optimalkan ukuran (WebP/PNG, lebar ~1200px cukup untuk thumbnail) demi performa.
+- **Format bebas** — `.webp`, `.avif`, `.png`, `.jpg` semua didukung (WebP/AVIF paling ringan, disarankan).
+- **Ekstensi di frontmatter HARUS sama persis dengan nama file asli.** Kalau filenya `screenai.webp`
+  tapi frontmatter menulis `screenai.png`, gambarnya 404 (tidak muncul) — ini penyebab tersering.
+- **Hindari spasi** di nama file (pakai `nama-file.webp`, bukan `Nama File.webp`).
+- Optimalkan ukuran (lebar ~1200px cukup untuk thumbnail) demi performa.
 
 ---
 

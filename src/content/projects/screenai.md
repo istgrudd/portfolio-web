@@ -1,48 +1,52 @@
 ---
 title: "ScreenAI"
 category: "NLP"
-tags: ["RAG", "LLM", "Explainability", "Full-stack"]
-summary: "AI recruitment screening that ranks candidates against a recruiter's rubric — with blind, bias-stripped scoring and cited evidence behind every decision. Capstone (team of 4); a production fork runs at MBC Laboratory."
+tags: ["RAG", "NER", "Explainable AI", "Blind Screening", "LLM"]
+summary: "AI recruitment screening that pairs NER-based blind screening with RAG competency scoring and Explainable AI to rank candidates fairly and transparently."
 featured: true
 order: 1
 status: "completed"
-timeframe: "2026 · 10 weeks"
-thumbnail: "/images/projects/Workflow sistem.png"
+timeframe: "2026 · 10-week capstone"
+thumbnail: "/images/projects/screenai.webp"
 metrics:
-  - { value: "440", label: "CVs ranked" }
-  - { value: "3-layer", label: "AI pipeline" }
-  - { value: "10 wk", label: "capstone build" }
-  - { value: "Prod", label: "deployed @ MBC Lab" }
+  - { value: "240", label: "real CVs evaluated" }
+  - { value: "4", label: "position rubrics" }
+  - { value: "3", label: "integrated AI mechanisms" }
 problem: |
-  Recruiters skim a CV in roughly 7 seconds, and keyword-only ATS tools rank without showing their reasoning — leaving unconscious bias unchecked and trust low. Manual screening is slow, inconsistent, and hard to audit.
-approach: |
-  A three-layer AI pipeline. First, blind screening uses IndoBERT NER to strip identity before any scoring. Second, competency matching uses a LangChain RAG pipeline to ground every ranking in a recruiter-defined rubric. Third, explainability ensures each score carries an evidence-based justification.
+  Manual recruitment fails in two intertwined ways. It is slow and expensive — recruiters spend an average of 7.4 seconds reviewing a single CV, while the cost per hire can reach USD 4,700 per position — and it is vulnerable to unconscious bias (affinity, halo, contrast) that quietly shapes who advances.
 
-  The backend is FastAPI with ChromaDB for rubric embeddings; the frontend is React + Vite + Tailwind. The system ingests 440 CVs and ranks them by rubric fit with transparent reasoning.
+  Commercial Applicant Tracking Systems do not close this gap. Most rely on keyword matching and give no transparency into why a candidate was scored the way they were, so recruiter trust in automated decisions stays low.
+approach: |
+  ScreenAI integrates three mechanisms that existing ATS tools rarely combine in one platform: NER-based blind screening, RAG competency evaluation, and Explainable AI scoring.
+
+  The pipeline runs end to end. PyMuPDF extracts and normalizes text from uploaded PDFs; an IndoBERT NER model detects and masks identity attributes (name, contact, institution, photo) to enforce blind screening; a LangChain RAG pipeline retrieves the recruiter-defined qualification rubric for the target role; and DeepSeek V3 scores the candidate per competency dimension, grounding every score in specific evidence from the CV.
+
+  Recruiters review ranked results in a FastAPI-backed dashboard that surfaces the XAI justification behind each score, generates a profile summary and interview questions, and supports manual override with an audit log.
 results: |
-  - Shipped as a capstone for a team of 4 within 10 weeks.
-  - A production fork now runs at MBC Laboratory for internal assistant recruitment.
-  - Blind screening removes identity signals before scoring.
-  - Every score cites the CV evidence it was based on, so recruiters can trust and audit it.
-role: "Team of 4 — owned the AI pipeline architecture: NER anonymization, RAG integration, and prompt engineering."
+  - Built a functional end-to-end pipeline — upload → extract → anonymize → retrieve rubric → score → rank — tested against a real internal dataset of 240 anonymized CVs across 4 roles (Cyber Security, Big Data, Game Technology, GIS).
+  - Implemented evidence-based XAI: every competency score links back to a quoted span from the CV, making each decision traceable and verifiable.
+  - Shipped a recruiter dashboard with ranking, manual override, and audit logging, plus auto-generated profile summaries and interview questions.
+  - Evaluated via binary classification against historical hiring ground truth, using Accuracy, Precision, Recall, and F1-Score as the primary metric (recall prioritized, since missing a strong candidate costs more than a correctable false positive).
+role: "Project Lead & AI Engineer — coordinated a 4-person team, architected and built the RAG + LangChain pipeline, owned LLM prompt engineering, and implemented the evidence-based XAI layer."
 architecture: |
-  Three sequential layers. (1) Blind screening — IndoBERT NER plus a regex fallback strips names, contacts, and ID numbers before scoring, so identity cannot bias the result. (2) Competency matching — a LangChain RAG pipeline grounds each score in a recruiter-defined rubric stored as ChromaDB embeddings. (3) Explainability — the scoring prompt returns strict JSON, and each score ships with cited evidence pulled from the CV.
+  A single LangChain-orchestrated pipeline chains four AI components. Document parsing (PyMuPDF) feeds an IndoBERT NER anonymizer, whose blind-screened text is embedded and matched against a vector store of recruiter rubrics. The retrieved rubric and the anonymized CV are composed into one prompt for DeepSeek V3, which returns structured JSON: per-dimension scores, evidence-based justifications, a profile summary, and interview questions. Results flow to the recruiter dashboard for ranking and override. The full analysis runs as a batch job once the recruitment window closes.
 decisions: |
-  - IndoBERT + regex, not either alone: NER models miss phone numbers, emails, and NIK/ID numbers; regex catches those structured patterns; IndoBERT handles Indonesian names, organizations, and locations. Together they make blind screening reliable.
-  - ChromaDB for rubric embeddings: rubrics are small (5–10 dimensions), so a local, file-based vector store is ideal — no external service dependency. Embeddings use sentence-transformers/all-MiniLM-L6-v2 for lightweight multilingual support.
-  - Structured JSON + retry logic: the scoring prompt enforces a strict schema; the backend validates with Zod and retries up to 3 times with progressively stricter prompts. Temperature 0 for deterministic output.
+  - DeepSeek V4 over GPT-4o-mini: comparable reasoning at $0.27/M input tokens — the most cost-efficient choice for batch-scoring hundreds of documents — and drop-in via an OpenAI-compatible endpoint, so no pipeline rewrite.
+  - IndoBERT NER over generic English NER: the CVs are predominantly Indonesian, so a model fine-tuned on Indonesian outperforms English-centric NER on local names and institutions.
+  - RAG over a pure LLM: grounding every score in a recruiter-defined rubric makes outputs verifiable and lets recruiters tune criteria without touching the pipeline.
+  - Structured JSON output: enforced on every LLM response to keep results programmatically reliable and reduce hallucination on non-standard documents.
 lessons: |
-  - Layered anonymization is non-negotiable: model-based NER alone lets pattern-based PII slip through. The regex fallback is essential in production.
-  - LLM output needs guardrails: without schema enforcement and retries, even capable models produce unusable output a meaningful fraction of the time.
-  - Users value speed over options: recruiters used exactly three flows (upload, dashboard, detail). The redesign stripped everything else.
+  - Ground-truth caveat: high accuracy against historical hiring decisions can mean the system is replicating past human bias rather than removing it — flagged as an explicit limitation and a future fairness-evaluation direction (demographic parity, equalized odds).
+  - Blind screening is necessary but not sufficient: masking identity removes one bias vector, but transparency (XAI) and human override are what actually earn recruiter trust.
 stack:
-  - "FastAPI"
-  - "React"
-  - "Vite"
-  - "IndoBERT"
+  - "Python"
   - "LangChain"
-  - "ChromaDB"
-  - "Tailwind CSS"
+  - "IndoBERT"
+  - "DeepSeek V4"
+  - "PyMuPDF"
+  - "FastAPI"
+  - "Hugging Face Transformers"
 links:
   github: "https://github.com/istgrudd/screenai"
+  demo: "https://screenai.my.id/"
 ---

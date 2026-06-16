@@ -1,7 +1,15 @@
 import { defineCollection, z } from "astro:content";
 
 // Controlled vocabulary — one primary bucket per project (enables filtering).
-const CATEGORIES = ["Computer Vision", "NLP", "Full-stack", "Machine Learning"] as const;
+// Hybrid axis: some buckets are domain (CV/NLP/ML), others are the engineering
+// layer/role (Full-stack, Deployment & Infra) — kept consistent on purpose.
+const CATEGORIES = [
+  "Computer Vision",
+  "NLP",
+  "Full-stack",
+  "Machine Learning",
+  "Deployment & Infra",
+] as const;
 
 const projects = defineCollection({
   schema: z.object({

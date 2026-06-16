@@ -4,7 +4,7 @@ category: "Computer Vision"
 tags: ["Anti-spoofing", "Transfer Learning"]
 summary: "CLIP ViT-L/14 fine-tuned for face anti-spoofing, using Focal Loss and weighted sampling to handle heavy class imbalance between genuine and presentation-attack samples."
 featured: false
-order: 4
+order: 5
 status: "completed"
 timeframe: "2025"
 problem: |
