@@ -22,5 +22,5 @@ stack:
   - "Transformers"
   - "Python"
 links:
-  github: "#"
+  github: "https://github.com/istgrudd/emotion-classification"
 ---

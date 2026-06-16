@@ -37,7 +37,5 @@ stack:
   - "pandas"
   - "Matplotlib"
 links:
-  github: "#"
-  demo: "#"
-  paper: "#"
+  github: "https://github.com/istgrudd/sdpi-analisis_risiko_operasional"
 ---
