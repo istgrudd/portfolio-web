@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../../components/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.md$/, "") },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const { data, body } = post;
+
+function readingTime(text: string): number {
+  const words = text.trim().split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+
+const langLabels: Record<string, string> = { en: "EN", id: "ID" };
+const pageTitle = data.title;
+const pageDesc = data.summary;
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} ogType="article">
+  <article class="mx-auto max-w-3xl px-4 pb-16 pt-16 sm:px-6 sm:pt-24">
+    <!-- Header -->
+    <div class="flex flex-wrap items-center gap-3">
+      <time datetime={data.date.toISOString()} class="text-sm text-gray-400">
+        {data.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+      </time>
+      <span class="rounded-md border border-gray-200 px-2 py-0.5 text-xs font-medium text-gray-500 dark:border-gray-700 dark:text-gray-400">
+        {langLabels[data.lang] ?? data.lang.toUpperCase()}
+      </span>
+      <span class="text-xs text-gray-400">{readingTime(body ?? "")} min read</span>
+    </div>
+
+    <h1 class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">{data.title}</h1>
+    <p class="mt-4 text-lg leading-relaxed text-gray-500 dark:text-gray-400">{data.summary}</p>
+
+    {data.tags.length > 0 && (
+      <div class="mt-4 flex flex-wrap gap-1.5">
+        {data.tags.map((tag) => (
+          <span class="rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-600 dark:bg-gray-800 dark:text-gray-400">
+            #{tag}
+          </span>
+        ))}
+      </div>
+    )}
+
+    <!-- Content -->
+    <div class="prose-custom prose prose-gray mt-10 max-w-none dark:prose-invert
+      prose-headings:font-bold prose-headings:tracking-tight
+      prose-h2:mt-10 prose-h2:text-xl
+      prose-h3:mt-8 prose-h3:text-lg
+      prose-p:leading-relaxed
+      prose-a:text-accent-600 prose-a:no-underline hover:prose-a:underline dark:prose-a:text-accent-400
+      prose-code:rounded prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-sm prose-code:font-normal dark:prose-code:bg-gray-800
+      prose-pre:border prose-pre:border-gray-200 dark:prose-pre:border-gray-800
+      prose-img:rounded-xl
+      prose-blockquote:border-l-accent-500 prose-blockquote:bg-gray-50 prose-blockquote:py-1 prose-blockquote:pr-4 dark:prose-blockquote:bg-gray-900/30
+      prose-table:text-sm
+      prose-th:px-4 prose-th:py-2
+      prose-td:px-4 prose-td:py-2
+    ">
+      <Content />
+    </div>
+
+    <!-- Back link -->
+    <div class="mt-16 border-t border-gray-200/60 pt-6 dark:border-gray-800/60">
+      <a href="/blog" class="inline-flex items-center gap-1 text-sm font-medium text-accent-600 hover:underline dark:text-accent-400">
+        <span>&larr;</span> All Posts
+      </a>
+    </div>
+  </article>
+</BaseLayout>
