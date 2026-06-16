@@ -2,69 +2,105 @@
 import BaseLayout from "../../components/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
-const projects = await getCollection("projects", ({ data }) => data);
+const projects = await getCollection("projects");
 projects.sort((a, b) => a.data.order - b.data.order);
+
+const categories = ["All", ...new Set(projects.map((p) => p.data.category))];
+const slugify = (s: string) => s.toLowerCase().replace(/[\s/]+/g, "-");
 ---
 
-<BaseLayout title="Projects" description="A curated selection of ML, computer vision, NLP, and full-stack projects by Rudi Firdaus.">
-  <section class="mx-auto max-w-5xl px-4 pb-16 pt-16 sm:px-6 sm:pt-24">
-    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Projects</h1>
-    <p class="mt-3 max-w-2xl text-gray-500 dark:text-gray-400">
-      From research papers to production systems. Each project represents a concrete problem solved with measurable results.
+<BaseLayout title="Projects" description="Applied ML, computer vision, NLP, and full-stack projects by Rudi Firdaus — each a concrete problem solved with measurable results.">
+  <section class="mx-auto max-w-6xl px-4 pb-20 pt-16 sm:px-6 sm:pt-24">
+    <p class="eyebrow">Projects</p>
+    <h1 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">Things I've built</h1>
+    <p class="mt-4 max-w-2xl leading-relaxed text-ink-700 dark:text-fog-300">
+      Applied work — systems, models, and tools. Peer-reviewed research lives on the
+      <a href="/research" class="text-signal-600 underline-offset-2 hover:underline dark:text-signal-400">Research</a> page.
     </p>
 
-    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        projects.map((project) => (
-          <a
-            href={`/projects/${project.id.replace(/\.md$/, "")}`}
-            class="group flex flex-col overflow-hidden rounded-xl border border-gray-200/60 bg-white transition hover:border-accent-300 hover:shadow-sm dark:border-gray-800/60 dark:bg-gray-900/50 dark:hover:border-accent-700"
-          >
-            {project.data.thumbnail && (
-              <div class="h-40 w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
-                <img
-                  src={project.data.thumbnail}
-                  alt={project.data.title}
-                  class="h-full w-full object-cover transition group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-            )}
-            <div class="flex flex-col flex-1 p-6">
-            <div class="flex items-start justify-between gap-2">
-              <span class="text-xs font-medium uppercase tracking-wide text-accent-600 dark:text-accent-400">
-                {project.data.category}
-              </span>
-              {
-                project.data.status === "in-progress" && (
-                  <span class="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
-                    In Progress
-                  </span>
-                )
-              }
+    <!-- Filter -->
+    <div class="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+      {categories.map((cat, i) => (
+        <button
+          type="button"
+          data-filter={cat === "All" ? "all" : slugify(cat)}
+          class:list={[
+            "filter-btn border px-3 py-1.5 font-mono text-xs uppercase tracking-widest transition-colors",
+            i === 0
+              ? "border-signal-500 bg-signal-500 text-ink-950"
+              : "border-paper-line text-fog-500 hover:border-signal-500/60 hover:text-ink-900 dark:border-ink-700 dark:text-fog-400 dark:hover:text-fog-200",
+          ]}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <div id="project-grid" class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project) => (
+        <a
+          href={`/projects/${project.id.replace(/\.md$/, "")}`}
+          data-category={slugify(project.data.category)}
+          class="project-card card-edge group flex flex-col border border-paper-line bg-paper-raised dark:border-ink-800 dark:bg-ink-900"
+        >
+          {project.data.thumbnail ? (
+            <div class="aspect-[16/10] w-full overflow-hidden border-b border-paper-line bg-paper dark:border-ink-800 dark:bg-ink-850">
+              <img src={project.data.thumbnail} alt={project.data.title} class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
             </div>
-            <h2 class="mt-2 text-lg font-semibold group-hover:text-accent-600 dark:group-hover:text-accent-400">
-              {project.data.title}
-            </h2>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
-              {project.data.summary}
-            </p>
+          ) : (
+            <div class="flex aspect-[16/10] w-full items-center justify-center border-b border-paper-line bg-paper font-mono text-xs text-fog-400 dark:border-ink-800 dark:bg-ink-850">
+              cls:{project.data.category.toLowerCase().replace(/[\s/]+/g, "_")}
+            </div>
+          )}
+          <div class="flex flex-1 flex-col p-6">
+            <div class="flex items-center justify-between gap-2 font-mono text-xs">
+              <span class="text-signal-600 dark:text-signal-400">{project.data.category}</span>
+              <span class="flex items-center gap-2 text-fog-500 dark:text-fog-400">
+                {project.data.timeframe}
+                {project.data.featured && <span class="bg-signal-500 px-1.5 text-ink-950">★</span>}
+              </span>
+            </div>
+            <h2 class="mt-2 text-lg font-bold leading-snug group-hover:text-signal-600 dark:group-hover:text-signal-400">{project.data.title}</h2>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-700 dark:text-fog-400">{project.data.summary}</p>
             <div class="mt-4 flex flex-wrap gap-1.5">
               {project.data.stack.slice(0, 4).map((tech) => (
-                <span class="rounded-md bg-gray-100 px-2 py-0.5 text-xs text-gray-600 dark:bg-gray-800 dark:text-gray-400">
-                  {tech}
-                </span>
+                <span class="bg-paper px-2 py-0.5 font-mono text-[0.7rem] text-fog-500 dark:bg-ink-850 dark:text-fog-400">{tech}</span>
               ))}
               {project.data.stack.length > 4 && (
-                <span class="rounded-md bg-gray-100 px-2 py-0.5 text-xs text-gray-400 dark:bg-gray-800 dark:text-gray-500">
-                  +{project.data.stack.length - 4}
-                </span>
+                <span class="px-1 font-mono text-[0.7rem] text-fog-400">+{project.data.stack.length - 4}</span>
               )}
             </div>
-            </div>
-          </a>
-        ))
-      }
+          </div>
+        </a>
+      ))}
     </div>
+
+    <p id="empty-state" class="mt-12 hidden text-center font-mono text-sm text-fog-400">No projects in this category.</p>
   </section>
+
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+    const cards = document.querySelectorAll<HTMLElement>(".project-card");
+    const empty = document.getElementById("empty-state")!;
+    const activeCls = ["border-signal-500", "bg-signal-500", "text-ink-950"];
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.dataset.filter!;
+        buttons.forEach((b) => {
+          const on = b === btn;
+          b.classList.toggle("border-signal-500", on);
+          b.classList.toggle("bg-signal-500", on);
+          b.classList.toggle("text-ink-950", on);
+        });
+        let shown = 0;
+        cards.forEach((card) => {
+          const match = filter === "all" || card.dataset.category === filter;
+          card.classList.toggle("hidden", !match);
+          if (match) shown++;
+        });
+        empty.classList.toggle("hidden", shown > 0);
+      });
+    });
+  </script>
 </BaseLayout>

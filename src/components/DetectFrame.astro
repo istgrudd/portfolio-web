@@ -1,0 +1,24 @@
+---
+// Signature device: a machine-vision "detection frame" — corner brackets that
+// bracket a region, with an optional bounding-box label tag (top-left).
+interface Props {
+  label?: string;   // e.g. "rudi_firdaus"
+  meta?: string;    // e.g. "conf:0.99" or "cls:cv"
+  acquire?: boolean; // play the lock-on animation on load
+  class?: string;
+}
+const { label, meta, acquire = false, class: className = "" } = Astro.props;
+---
+
+<div class:list={["detframe", { "detframe--acquire": acquire }, className]}>
+  <span class="detframe__c detframe__c--tl"></span>
+  <span class="detframe__c detframe__c--tr"></span>
+  <span class="detframe__c detframe__c--bl"></span>
+  <span class="detframe__c detframe__c--br"></span>
+  {label && (
+    <span class="detframe__label">
+      {label}{meta && <span class="detframe__meta">{meta}</span>}
+    </span>
+  )}
+  <slot />
+</div>

@@ -1,17 +1,28 @@
 import { defineCollection, z } from "astro:content";
 
+// Controlled vocabulary — one primary bucket per project (enables filtering).
+const CATEGORIES = ["Computer Vision", "NLP", "Full-stack", "Machine Learning"] as const;
+
 const projects = defineCollection({
   schema: z.object({
     title: z.string(),
-    category: z.string(),
-    summary: z.string(),
+    category: z.enum(CATEGORIES),
+    tags: z.array(z.string()).default([]), // cross-cutting topics (RAG, Segmentation, …)
+    summary: z.string(), // one-line card description
     featured: z.boolean().default(false),
-    order: z.number().default(0),
+    order: z.number(),
     status: z.enum(["completed", "in-progress"]).default("completed"),
-    problem: z.string().optional(),
-    approach: z.string().optional(),
-    results: z.string().optional(),
-    role: z.string().optional(),
+    timeframe: z.string().optional(), // e.g. "2026", "10 weeks"
+    // Standardized headline numbers shown as a strip on the detail page.
+    metrics: z
+      .array(z.object({ value: z.string(), label: z.string() }))
+      .default([]),
+    // Core narrative — required so every project follows the same template.
+    problem: z.string(),
+    approach: z.string(),
+    results: z.string(),
+    role: z.string(),
+    // Optional deep-dive (flagship projects only).
     architecture: z.string().optional(),
     decisions: z.string().optional(),
     lessons: z.string().optional(),

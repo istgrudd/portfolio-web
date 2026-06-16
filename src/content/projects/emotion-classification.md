@@ -1,22 +1,24 @@
 ---
-title: "Emotion Classification (Indonesian Tweets)"
+title: "Emotion Classification — Indonesian Tweets"
 category: "NLP"
-summary: "Comparative study of BiLSTM vs IndoBERT for emotion classification on Indonesian Twitter data."
+tags: ["Text Classification", "Transformers"]
+summary: "Comparative study of BiLSTM vs IndoBERT for emotion classification on Indonesian tweets — quantifying how much contextual embeddings help on informal, code-switched text."
 featured: false
-order: 6
+order: 5
 status: "completed"
+timeframe: "2025"
 problem: |
-  Emotion detection in Indonesian social media text is challenging due to informal language, code-switching, and limited labeled datasets. Understanding which architecture works best is important for downstream NLP applications in Indonesian.
+  Emotion detection in Indonesian social-media text is hard: informal language, code-switching, and limited labeled data. Knowing which architecture works best matters for downstream Indonesian NLP.
 approach: |
-  Compared BiLSTM and IndoBERT architectures on an Indonesian Twitter emotion dataset. BiLSTM served as the baseline sequence model; IndoBERT leveraged pre-trained contextual embeddings. Evaluated across multiple emotion categories with standard classification metrics.
+  Compared a BiLSTM baseline against IndoBERT on an Indonesian Twitter emotion dataset. BiLSTM served as the sequence baseline; IndoBERT leveraged pre-trained contextual embeddings. Both were evaluated across emotion categories with standard classification metrics.
 results: |
-  - IndoBERT significantly outperformed BiLSTM across all emotion categories.
-  - Contextual embeddings from IndoBERT captured informal Indonesian language nuances better than static embeddings.
-role: "Researcher — experiment design, model implementation, comparative analysis."
+  - IndoBERT outperformed BiLSTM across every emotion category.
+  - Contextual embeddings captured informal Indonesian nuance far better than static embeddings.
+role: "Researcher — experiment design, model implementation, and comparative analysis."
 stack:
+  - "PyTorch"
   - "IndoBERT"
   - "BiLSTM"
-  - "PyTorch"
   - "Transformers"
   - "Python"
 links:

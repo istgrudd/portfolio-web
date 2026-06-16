@@ -12,9 +12,10 @@ export const SITE = {
 export const PERSONAL = {
   name: "Rudi Firdaus",
   email: "rudifirdaus233@gmail.com",
-  role: "Data Scientist / ML Engineer",
+  role: "ML Engineer / Researcher",
+  location: "Bandung, Indonesia",
   valueProposition:
-    "I build computer vision systems and data infrastructure that work outside the notebook. First-author IEEE publication on vehicle detection, Vice Head of a 54-person research lab, and hands-on experience shipping AI to production—from RAG pipelines to internal tools used by real teams.",
+    "I build computer vision systems and data infrastructure that work outside the notebook. First-author IEEE publication on vehicle detection, Vice Head of a 54-person research lab, and hands-on experience shipping AI to production — from RAG pipelines to internal tools real teams depend on.",
   links: {
     github: "https://github.com/istgrudd",
     linkedin: "https://linkedin.com/in/rudifirdaus",

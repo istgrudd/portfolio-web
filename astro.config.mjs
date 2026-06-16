@@ -3,7 +3,7 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  integrations: [tailwind(), sitemap()],
+  integrations: [tailwind({ applyBaseStyles: false }), sitemap()],
   site: "https://rudi-firdaus.netlify.app",
   trailingSlash: "never",
 });

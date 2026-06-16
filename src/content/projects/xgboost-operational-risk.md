@@ -1,18 +1,20 @@
 ---
 title: "XGBoost Operational Risk + SHAP"
-category: "ML / Explainability"
-summary: "Operational risk prediction on manufacturing dataset with SHAP-based model explainability."
+category: "Machine Learning"
+tags: ["Explainability", "Tabular"]
+summary: "Operational-risk classifier on manufacturing data, paired with SHAP explanations so operators see why a prediction was made, not just the score."
 featured: false
-order: 9
+order: 7
 status: "completed"
+timeframe: "2025"
 problem: |
-  Manufacturing operations face various risks that can lead to production downtime and financial losses. Predictive models help identify high-risk scenarios, but stakeholders also need to understand why a prediction was made.
+  Manufacturing operations face risks that lead to downtime and financial loss. Predictive models help flag high-risk scenarios, but stakeholders also need to understand why a prediction was made.
 approach: |
-  Trained XGBoost classifier on a manufacturing operational dataset to predict risk levels. Applied SHAP (SHapley Additive exPlanations) for global and local model interpretability. Feature importance and SHAP waterfall plots provide actionable insights for operators.
+  Trained an XGBoost classifier on a manufacturing operational dataset to predict risk levels, then applied SHAP (SHapley Additive exPlanations) for global and local interpretability. Feature-importance and SHAP waterfall plots turn predictions into actionable insight.
 results: |
-  - XGBoost achieved strong predictive performance on operational risk classification.
-  - SHAP analysis revealed key risk drivers, enabling targeted mitigation strategies.
-role: "Developer — model training, SHAP integration, result interpretation."
+  - XGBoost delivered strong predictive performance on operational-risk classification.
+  - SHAP analysis surfaced the key risk drivers, enabling targeted mitigation.
+role: "Developer — model training, SHAP integration, and result interpretation."
 stack:
   - "XGBoost"
   - "SHAP"

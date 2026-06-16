@@ -15,55 +15,38 @@ const langLabels: Record<string, string> = { en: "EN", id: "ID" };
 
 <BaseLayout
   title="Blog"
-  description="Writing about machine learning, computer vision, NLP, and building production AI systems. By Rudi Firdaus."
+  description="Writing on machine learning, computer vision, NLP, and building production AI systems. By Rudi Firdaus."
 >
-  <section class="mx-auto max-w-3xl px-4 pb-16 pt-16 sm:px-6 sm:pt-24">
-    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Blog</h1>
-    <p class="mt-3 max-w-2xl leading-relaxed text-gray-500 dark:text-gray-400">
-      Thoughts on ML engineering, research, and building things that work outside notebooks.
+  <section class="mx-auto max-w-3xl px-4 pb-20 pt-16 sm:px-6 sm:pt-24">
+    <p class="eyebrow">Blog</p>
+    <h1 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">Notes &amp; write-ups</h1>
+    <p class="mt-4 max-w-2xl leading-relaxed text-ink-700 dark:text-fog-300">
+      On ML engineering, research, and building things that work outside the notebook.
     </p>
 
-    {
-      posts.length === 0 ? (
-        <div class="mt-16 text-center">
-          <p class="text-gray-400 dark:text-gray-500">No posts yet.</p>
-        </div>
-      ) : (
-        <div class="mt-12 divide-y divide-gray-200/60 dark:divide-gray-800/60">
-          {posts.map((post) => (
-            <article class="py-8 first:pt-0 last:pb-0">
-              <a href={`/blog/${post.id.replace(/\.md$/, "")}`} class="group">
-                <div class="flex items-center gap-3">
-                  <time datetime={post.data.date.toISOString()} class="text-sm text-gray-400">
-                    {post.data.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-                  </time>
-                  <span class="rounded-md border border-gray-200 px-2 py-0.5 text-xs font-medium text-gray-500 dark:border-gray-700 dark:text-gray-400">
-                    {langLabels[post.data.lang] ?? post.data.lang.toUpperCase()}
-                  </span>
-                  <span class="text-xs text-gray-400">{readingTime(post.body ?? "")} min read</span>
-                </div>
-
-                <h2 class="mt-2 text-xl font-semibold group-hover:text-accent-600 dark:group-hover:text-accent-400">
-                  {post.data.title}
-                </h2>
-                <p class="mt-2 leading-relaxed text-gray-600 dark:text-gray-300">
-                  {post.data.summary}
-                </p>
-
-                {post.data.tags.length > 0 && (
-                  <div class="mt-3 flex flex-wrap gap-1.5">
-                    {post.data.tags.map((tag) => (
-                      <span class="rounded-md bg-gray-100 px-2 py-0.5 text-xs text-gray-500 dark:bg-gray-800 dark:text-gray-400">
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </a>
-            </article>
-          ))}
-        </div>
-      )
-    }
+    {posts.length === 0 ? (
+      <p class="mt-16 text-center font-mono text-sm text-fog-400">No posts yet.</p>
+    ) : (
+      <div class="mt-10 border-t border-paper-line dark:border-ink-800">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id.replace(/\.md$/, "")}`} class="group block border-b border-paper-line py-7 transition-colors hover:bg-ink-900/[0.02] dark:border-ink-800 dark:hover:bg-ink-900/40">
+            <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-fog-500 dark:text-fog-400">
+              <time datetime={post.data.date.toISOString()}>
+                {post.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+              </time>
+              <span class="border border-paper-line px-1.5 dark:border-ink-700">{langLabels[post.data.lang] ?? post.data.lang.toUpperCase()}</span>
+              <span>{readingTime(post.body ?? "")} min</span>
+            </div>
+            <h2 class="mt-2 text-xl font-bold leading-snug group-hover:text-signal-600 dark:group-hover:text-signal-400">{post.data.title}</h2>
+            <p class="mt-2 leading-relaxed text-ink-700 dark:text-fog-400">{post.data.summary}</p>
+            {post.data.tags.length > 0 && (
+              <div class="mt-3 flex flex-wrap gap-2 font-mono text-xs text-fog-500 dark:text-fog-400">
+                {post.data.tags.map((tag) => <span>#{tag}</span>)}
+              </div>
+            )}
+          </a>
+        ))}
+      </div>
+    )}
   </section>
 </BaseLayout>

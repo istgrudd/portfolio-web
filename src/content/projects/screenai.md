@@ -1,32 +1,40 @@
 ---
 title: "ScreenAI"
-thumbnail: "/images/projects/Workflow sistem.png"
-category: "NLP / Full-stack"
-summary: "AI recruitment screening that ranks candidates against a rubric—fairly, and with an evidence-based reason behind every score. Capstone project, 440 CVs, production fork deployed at MBC Laboratory."
+category: "NLP"
+tags: ["RAG", "LLM", "Explainability", "Full-stack"]
+summary: "AI recruitment screening that ranks candidates against a recruiter's rubric — with blind, bias-stripped scoring and cited evidence behind every decision. Capstone (team of 4); a production fork runs at MBC Laboratory."
 featured: true
 order: 1
 status: "completed"
+timeframe: "2026 · 10 weeks"
+thumbnail: "/images/projects/Workflow sistem.png"
+metrics:
+  - { value: "440", label: "CVs ranked" }
+  - { value: "3-layer", label: "AI pipeline" }
+  - { value: "10 wk", label: "capstone build" }
+  - { value: "Prod", label: "deployed @ MBC Lab" }
 problem: |
-  Recruiters skim a CV in ~7.4 seconds, and keyword-only ATS tools rank without transparency—leaving unconscious bias unchecked and trust low. Manual screening is slow, inconsistent, and prone to hidden bias.
+  Recruiters skim a CV in roughly 7 seconds, and keyword-only ATS tools rank without showing their reasoning — leaving unconscious bias unchecked and trust low. Manual screening is slow, inconsistent, and hard to audit.
 approach: |
-  Built a three-layer AI pipeline: (1) Blind screening using IndoBERT NER to strip identity before scoring, (2) Competency matching via RAG with LangChain to ground ranking in a recruiter-defined rubric, and (3) Explainability (XAI) ensuring every score carries an evidence-based justification.
+  A three-layer AI pipeline. First, blind screening uses IndoBERT NER to strip identity before any scoring. Second, competency matching uses a LangChain RAG pipeline to ground every ranking in a recruiter-defined rubric. Third, explainability ensures each score carries an evidence-based justification.
 
-  Backend is FastAPI with ChromaDB for rubric embeddings. Frontend is React + Vite + Tailwind. The system processes 440 CVs and ranks them by rubric fit with transparent reasoning.
+  The backend is FastAPI with ChromaDB for rubric embeddings; the frontend is React + Vite + Tailwind. The system ingests 440 CVs and ranks them by rubric fit with transparent reasoning.
 results: |
-  - Successfully deployed capstone project for a team of 4 within 10 weeks.
-  - Production fork currently used at MBC Laboratory for internal assistant recruitment.
-  - Blind screening eliminates identity bias before scoring.
-  - Every score includes cited evidence from the CV for recruiter trust.
-role: "Team of 4 — contributed to AI pipeline architecture, NER anonymization, RAG integration, and prompt engineering."
+  - Shipped as a capstone for a team of 4 within 10 weeks.
+  - A production fork now runs at MBC Laboratory for internal assistant recruitment.
+  - Blind screening removes identity signals before scoring.
+  - Every score cites the CV evidence it was based on, so recruiters can trust and audit it.
+role: "Team of 4 — owned the AI pipeline architecture: NER anonymization, RAG integration, and prompt engineering."
+architecture: |
+  Three sequential layers. (1) Blind screening — IndoBERT NER plus a regex fallback strips names, contacts, and ID numbers before scoring, so identity cannot bias the result. (2) Competency matching — a LangChain RAG pipeline grounds each score in a recruiter-defined rubric stored as ChromaDB embeddings. (3) Explainability — the scoring prompt returns strict JSON, and each score ships with cited evidence pulled from the CV.
 decisions: |
-  - IndoBERT + Regex both needed: NER models miss phone numbers, emails, and NIK/ID numbers. IndoBERT handles Indonesian names, organizations, and locations. Regex fallback catches structured patterns. Together they achieve reliable blind screening.
-  - ChromaDB for rubric embeddings: Rubrics are small (5-10 dimensions), so ChromaDB's local, file-based vector store is ideal. No external service dependency. Embeddings use sentence-transformers/all-MiniLM-L6-v2 for lightweight, multilingual support.
-  - Structured JSON + retry logic: The scoring prompt enforces a strict JSON schema. Backend parses the response, validates against Zod schemas, and retries (up to 3 attempts) with increasingly strict prompts if parsing fails. Temperature = 0 for deterministic output.
-  - Production fork at MBC Lab: After the capstone, a fork of ScreenAI was deployed internally at MBC Laboratory to support assistant recruitment. The system handles real CV uploads and rubric-based ranking for the lab's selection process.
+  - IndoBERT + regex, not either alone: NER models miss phone numbers, emails, and NIK/ID numbers; regex catches those structured patterns; IndoBERT handles Indonesian names, organizations, and locations. Together they make blind screening reliable.
+  - ChromaDB for rubric embeddings: rubrics are small (5–10 dimensions), so a local, file-based vector store is ideal — no external service dependency. Embeddings use sentence-transformers/all-MiniLM-L6-v2 for lightweight multilingual support.
+  - Structured JSON + retry logic: the scoring prompt enforces a strict schema; the backend validates with Zod and retries up to 3 times with progressively stricter prompts. Temperature 0 for deterministic output.
 lessons: |
-  - Layered anonymization is non-negotiable: Model-based NER alone lets pattern-based PII slip through. Regex fallback is essential for production use.
-  - LLM output needs guardrails: Without JSON schema enforcement and retry logic, even capable models produce unusable output ~10% of the time.
-  - Users value speed over features: The first UI had too many options. Recruiters used exactly three flows (upload, dashboard, detail). The redesign stripped everything else.
+  - Layered anonymization is non-negotiable: model-based NER alone lets pattern-based PII slip through. The regex fallback is essential in production.
+  - LLM output needs guardrails: without schema enforcement and retries, even capable models produce unusable output a meaningful fraction of the time.
+  - Users value speed over options: recruiters used exactly three flows (upload, dashboard, detail). The redesign stripped everything else.
 stack:
   - "FastAPI"
   - "React"
@@ -34,9 +42,7 @@ stack:
   - "IndoBERT"
   - "LangChain"
   - "ChromaDB"
-  - "LLM"
   - "Tailwind CSS"
 links:
   github: "https://github.com/istgrudd/screenai"
-  demo: "#"
 ---

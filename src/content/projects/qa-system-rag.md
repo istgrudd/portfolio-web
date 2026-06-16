@@ -1,23 +1,24 @@
 ---
-title: "QA System (OpenSearch RAG)"
+title: "QA System — OpenSearch RAG"
 category: "NLP"
-summary: "Retrieval-augmented QA system using OpenSearch as vector database with custom RAG pipeline."
+tags: ["RAG", "Vector Search"]
+summary: "Retrieval-augmented QA pipeline using OpenSearch as the vector store — grounds answers in source documents to cut hallucination on domain-specific questions."
 featured: false
-order: 8
+order: 6
 status: "completed"
+timeframe: "2025"
 problem: |
-  Traditional QA systems struggle with domain-specific knowledge not present in training data. A retrieval-augmented approach can ground answers in provided documents, improving accuracy and reducing hallucination.
+  Traditional QA systems struggle with domain-specific knowledge absent from their training data. A retrieval-augmented approach grounds answers in provided documents, improving accuracy and reducing hallucination.
 approach: |
-  Built a RAG pipeline using OpenSearch as the vector store for document retrieval. Documents are chunked and embedded, then retrieved based on query similarity. The retrieved context is augmented into the LLM prompt for grounded answer generation.
+  Built a RAG pipeline with OpenSearch as the vector store. Documents are chunked and embedded, then retrieved by query similarity; the retrieved context is injected into the LLM prompt for grounded answer generation.
 results: |
   - Domain-specific QA with grounded, citation-backed answers.
-  - OpenSearch provides scalable vector search for large document collections.
-role: "Developer — pipeline design, OpenSearch integration, prompt engineering."
+  - OpenSearch provides scalable vector search over large document collections.
+role: "Developer — pipeline design, OpenSearch integration, and prompt engineering."
 stack:
   - "OpenSearch"
   - "LangChain"
   - "Python"
-  - "Vector Search"
 links:
   github: "#"
 ---

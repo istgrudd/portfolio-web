@@ -1,210 +1,102 @@
 ---
 import BaseLayout from "../components/BaseLayout.astro";
-import { PERSONAL, TECH_STACK, LEADERSHIP } from "../lib/constants";
+import { TECH_STACK, LEADERSHIP } from "../lib/constants";
+
+const stackGroups = [
+  { label: "Languages", items: TECH_STACK.languages },
+  { label: "ML / DL", items: TECH_STACK.mlDl },
+  { label: "MLOps & Infra", items: TECH_STACK.mlOpsInfra },
+  { label: "Full-stack", items: TECH_STACK.fullstack },
+];
+
+const timeline = [
+  { date: "Jun 2026", title: "Top-10 Finalist — Dolanan Data Nexus", body: "National data-mining competition. Swin Transformer + FPN for semantic segmentation of post-flood UAV imagery." },
+  { date: "May 2026", title: "Vice Head — MBC Laboratory", body: "Oversees 54 assistants across 4 divisions. Manages research infrastructure, internal tooling, and lab-wide coordination." },
+  { date: "2026", title: "ScreenAI — Capstone + Thesis", body: "AI recruitment screening: blind screening (NER) + competency match (RAG) + XAI. Team of 4, 440 CVs. Production fork deployed at MBC Lab. Ongoing thesis on traffic flow estimation." },
+  { date: "Nov 2025", title: "First Author — ICSINTESA 2025 (IEEE)", body: "Optimizing YOLOv11 for vehicle detection in low-visibility CCTV. mAP@0.5 0.896, 122 FPS. Peer-reviewed IEEE publication." },
+  { date: "Jul 2025", title: "Data Engineer Intern — PT Metrocom", body: "Pipeline integration and query tuning for data-engineering workflows." },
+  { date: "Jun 2025", title: "Head of Big Data Division", body: "Led 16 researchers to 6 publications with a 100% project success rate. Designed the division's Agile sprint framework." },
+  { date: "Jan 2025", title: "Best Presentation — ADIKARA", body: "Awarded Best Presentation at the ADIKARA Data Mining Competition." },
+  { date: "Oct 2024", title: "Research Assistant — MBC Laboratory", body: "Started computer-vision research at MBC Lab, focusing on object detection for traffic systems." },
+  { date: "Sep 2023", title: "B.Sc. Data Science — Telkom University", body: "GPA 3.46 / 4.0. School of Informatics, Bandung, Indonesia." },
+];
 ---
 
 <BaseLayout
   title="About"
   description="Rudi Firdaus — Data Science student at Telkom University, first-author IEEE publication at ICSINTESA 2025, Vice Head of MBC Laboratory (54 assistants), and builder of production AI systems."
 >
-  <section class="mx-auto max-w-3xl px-4 pb-16 pt-16 sm:px-6 sm:pt-24">
-    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">About</h1>
+  <section class="mx-auto max-w-3xl px-4 pb-20 pt-16 sm:px-6 sm:pt-24">
+    <p class="eyebrow">About</p>
+    <h1 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">Rudi Firdaus</h1>
 
     <!-- Bio -->
-    <div class="mt-10 max-w-2xl">
-      <h2 class="text-xl font-bold">Bio</h2>
-      <div class="mt-4 space-y-4 leading-relaxed text-gray-600 dark:text-gray-300">
-        <p>
-          I&rsquo;m Rudi Firdaus, a final-year Data Science student at Telkom University, Bandung, specializing in computer vision and data engineering. My work sits at the intersection of research and production—I build models that work in adverse conditions and systems that real teams depend on.
-        </p>
-        <p>
-          I published my first IEEE paper as a first author at ICSINTESA 2025—optimizing YOLOv11 for vehicle detection in low-visibility CCTV footage, achieving mAP@0.5 of 0.896 with 122 FPS real-time inference. That research now forms the foundation for my ongoing thesis on traffic flow estimation.
-        </p>
-        <p>
-          On the engineering side, I built ScreenAI (AI recruitment screening with NER + RAG + XAI) as a capstone project with a team of 4, and LabLink—a full-stack internal information system for MBC Laboratory, built solo and adopted across all 4 divisions. I also completed a Data Engineer internship at PT Metrocom, working on pipeline integration and query tuning.
-        </p>
-      </div>
+    <div class="mt-8 space-y-4 text-[0.95rem] leading-relaxed text-ink-700 dark:text-fog-300">
+      <p>
+        I'm a final-year Data Science student at Telkom University, Bandung, specializing in computer vision and data engineering. My work sits at the intersection of research and production — I build models that hold up in adverse conditions and systems that real teams depend on.
+      </p>
+      <p>
+        I published my first IEEE paper as first author at ICSINTESA 2025 — optimizing YOLOv11 for vehicle detection in low-visibility CCTV footage, reaching mAP@0.5 of 0.896 with 122 FPS real-time inference. That research now anchors my ongoing thesis on traffic flow estimation.
+      </p>
+      <p>
+        On the engineering side, I built ScreenAI (AI recruitment screening with NER + RAG + XAI) as a capstone with a team of 4, and LabLink — a full-stack internal information system for MBC Laboratory, built solo and adopted across all four divisions. I also completed a Data Engineer internship at PT Metrocom, working on pipeline integration and query tuning.
+      </p>
     </div>
 
+    <hr class="rule my-12" />
+
     <!-- Leadership -->
-    <div class="mt-12">
-      <h2 class="text-xl font-bold">Leadership</h2>
-      <div class="mt-4 rounded-xl border border-gray-200/60 bg-gray-50/50 p-6 dark:border-gray-800/60 dark:bg-gray-900/30">
+    <div>
+      <p class="eyebrow">Leadership</p>
+      <div class="mt-5 border border-paper-line bg-paper-raised p-6 dark:border-ink-800 dark:bg-ink-900">
         <div class="flex flex-wrap items-center justify-between gap-2">
-          <h3 class="font-semibold">{LEADERSHIP.role}</h3>
-          <span class="text-sm text-gray-400">{LEADERSHIP.period}</span>
+          <h2 class="text-lg font-bold">{LEADERSHIP.role}</h2>
+          <span class="font-mono text-xs text-fog-500 dark:text-fog-400">{LEADERSHIP.period}</span>
         </div>
-        <ul class="mt-4 space-y-2">
+        <ul class="mt-5 space-y-3">
           {LEADERSHIP.highlights.map((item) => (
-            <li class="flex items-start gap-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
-              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-500"></span>
-              {item}
+            <li class="flex gap-3 text-sm leading-relaxed text-ink-700 dark:text-fog-300">
+              <span class="mt-2 h-1 w-1 shrink-0 bg-signal-500"></span>{item}
             </li>
           ))}
         </ul>
       </div>
     </div>
 
+    <hr class="rule my-12" />
+
     <!-- Skills -->
-    <div class="mt-12">
-      <h2 class="text-xl font-bold">Skills</h2>
-      <div class="mt-4 grid gap-4 sm:grid-cols-2">
-        <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
-          <h3 class="text-sm font-semibold uppercase tracking-wide text-gray-400">Languages</h3>
-          <div class="mt-3 flex flex-wrap gap-1.5">
-            {TECH_STACK.languages.map((item) => (
-              <span class="rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">{item}</span>
-            ))}
+    <div>
+      <p class="eyebrow">Skills</p>
+      <div class="mt-5 grid gap-px border border-paper-line bg-paper-line dark:border-ink-800 dark:bg-ink-800 sm:grid-cols-2">
+        {stackGroups.map((group) => (
+          <div class="bg-paper-raised p-5 dark:bg-ink-900">
+            <h3 class="font-mono text-xs uppercase tracking-widest text-fog-500 dark:text-fog-400">{group.label}</h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+              {group.items.map((item) => (
+                <span class="border border-paper-line bg-paper px-2 py-0.5 font-mono text-xs text-ink-700 dark:border-ink-700 dark:bg-ink-850 dark:text-fog-300">{item}</span>
+              ))}
+            </div>
           </div>
-        </div>
-        <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
-          <h3 class="text-sm font-semibold uppercase tracking-wide text-gray-400">ML / DL</h3>
-          <div class="mt-3 flex flex-wrap gap-1.5">
-            {TECH_STACK.mlDl.map((item) => (
-              <span class="rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">{item}</span>
-            ))}
-          </div>
-        </div>
-        <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
-          <h3 class="text-sm font-semibold uppercase tracking-wide text-gray-400">MLOps & Infra</h3>
-          <div class="mt-3 flex flex-wrap gap-1.5">
-            {TECH_STACK.mlOpsInfra.map((item) => (
-              <span class="rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">{item}</span>
-            ))}
-          </div>
-        </div>
-        <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
-          <h3 class="text-sm font-semibold uppercase tracking-wide text-gray-400">Full-stack</h3>
-          <div class="mt-3 flex flex-wrap gap-1.5">
-            {TECH_STACK.fullstack.map((item) => (
-              <span class="rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">{item}</span>
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
     </div>
 
+    <hr class="rule my-12" />
+
     <!-- Timeline -->
-    <div class="mt-12">
-      <h2 class="text-xl font-bold">Journey</h2>
-      <div class="mt-6 space-y-0">
-        <div class="flex gap-4">
-          <div class="flex flex-col items-center">
-            <div class="h-3 w-3 rounded-full bg-accent-500"></div>
-            <div class="h-full w-px bg-gray-200 dark:bg-gray-800"></div>
-          </div>
-          <div class="pb-8">
-            <span class="text-sm text-gray-400">Jun 2026</span>
-            <h3 class="font-semibold">Top 10 Finalist — Dolanan Data Nexus</h3>
-            <p class="mt-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-              National data mining competition. Swin Transformer + FPN for semantic segmentation of post-flood UAV imagery.
-            </p>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <div class="flex flex-col items-center">
-            <div class="h-3 w-3 rounded-full bg-accent-500"></div>
-            <div class="h-full w-px bg-gray-200 dark:bg-gray-800"></div>
-          </div>
-          <div class="pb-8">
-            <span class="text-sm text-gray-400">May 2026</span>
-            <h3 class="font-semibold">Vice Head — MBC Laboratory</h3>
-            <p class="mt-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-              Oversees 54 assistants across 4 divisions. Manages research infrastructure, internal tooling, and lab-wide coordination.
-            </p>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <div class="flex flex-col items-center">
-            <div class="h-3 w-3 rounded-full bg-accent-500"></div>
-            <div class="h-full w-px bg-gray-200 dark:bg-gray-800"></div>
-          </div>
-          <div class="pb-8">
-            <span class="text-sm text-gray-400">2026</span>
-            <h3 class="font-semibold">ScreenAI — Capstone + Thesis</h3>
-            <p class="mt-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-              AI recruitment screening: blind screening (NER) + competency match (RAG) + XAI. Team of 4, 440 CVs. Production fork deployed at MBC Lab. Also ongoing thesis on traffic flow estimation.
-            </p>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <div class="flex flex-col items-center">
-            <div class="h-3 w-3 rounded-full bg-accent-500"></div>
-            <div class="h-full w-px bg-gray-200 dark:bg-gray-800"></div>
-          </div>
-          <div class="pb-8">
-            <span class="text-sm text-gray-400">Nov 2025</span>
-            <h3 class="font-semibold">First Author — ICSINTESA 2025 (IEEE)</h3>
-            <p class="mt-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-              Optimizing YOLOv11 for vehicle detection in low-visibility CCTV. mAP@0.5: 0.896, 122 FPS. Peer-reviewed IEEE publication.
-            </p>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <div class="flex flex-col items-center">
-            <div class="h-3 w-3 rounded-full bg-accent-500"></div>
-            <div class="h-full w-px bg-gray-200 dark:bg-gray-800"></div>
-          </div>
-          <div class="pb-8">
-            <span class="text-sm text-gray-400">Jul 2025</span>
-            <h3 class="font-semibold">Data Engineer Intern — PT Metrocom</h3>
-            <p class="mt-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-              Pipeline integration and query tuning for data engineering workflows.
-            </p>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <div class="flex flex-col items-center">
-            <div class="h-3 w-3 rounded-full bg-accent-500"></div>
-            <div class="h-full w-px bg-gray-200 dark:bg-gray-800"></div>
-          </div>
-          <div class="pb-8">
-            <span class="text-sm text-gray-400">Jun 2025</span>
-            <h3 class="font-semibold">Head of Big Data Division</h3>
-            <p class="mt-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-              Led 16 researchers to 6 publications with 100% project success rate. Designed Agile sprint framework for the division.
-            </p>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <div class="flex flex-col items-center">
-            <div class="h-3 w-3 rounded-full bg-accent-500"></div>
-            <div class="h-full w-px bg-gray-200 dark:bg-gray-800"></div>
-          </div>
-          <div class="pb-8">
-            <span class="text-sm text-gray-400">Jan 2025</span>
-            <h3 class="font-semibold">Best Presentation — ADIKARA</h3>
-            <p class="mt-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-              Awarded Best Presentation at the ADIKARA Data Mining Competition.
-            </p>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <div class="flex flex-col items-center">
-            <div class="h-3 w-3 rounded-full bg-accent-500"></div>
-            <div class="h-full w-px bg-gray-200 dark:bg-gray-800"></div>
-          </div>
-          <div class="pb-8">
-            <span class="text-sm text-gray-400">Oct 2024</span>
-            <h3 class="font-semibold">Research Assistant — MBC Laboratory</h3>
-            <p class="mt-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-              Started computer vision research at MBC Lab, focusing on object detection for traffic systems.
-            </p>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <div class="flex flex-col items-center">
-            <div class="h-3 w-3 rounded-full bg-accent-500"></div>
-          </div>
-          <div class="pb-4">
-            <span class="text-sm text-gray-400">Sep 2023</span>
-            <h3 class="font-semibold">B.Sc. Data Science — Telkom University</h3>
-            <p class="mt-1 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-              GPA 3.46 / 4.0. School of Informatics, Bandung, Indonesia.
-            </p>
-          </div>
-        </div>
-      </div>
+    <div>
+      <p class="eyebrow">Journey</p>
+      <ol class="mt-7 border-l border-paper-line dark:border-ink-700">
+        {timeline.map((entry) => (
+          <li class="relative pb-9 pl-7 last:pb-0">
+            <span class="absolute -left-[4.5px] top-1.5 h-2 w-2 bg-signal-500"></span>
+            <span class="font-mono text-xs text-fog-500 dark:text-fog-400">{entry.date}</span>
+            <h3 class="mt-1 font-bold leading-snug">{entry.title}</h3>
+            <p class="mt-1 text-sm leading-relaxed text-fog-500 dark:text-fog-400">{entry.body}</p>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 </BaseLayout>
