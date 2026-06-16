@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased transition-colors;
+  }
+
+  .dark body,
+  body.dark {
+    @apply bg-gray-950 text-gray-100;
+  }
+
+  ::selection {
+    @apply bg-accent-500/30;
+  }
+}
