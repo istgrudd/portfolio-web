@@ -20,5 +20,9 @@ Thumbs.db
 .env.*
 !.env.example
 
+# Portfolio assets (sensitive / not tracked)
+Portfolio*.pdf
+2025*.pdf
+
 # Misc
 *.log

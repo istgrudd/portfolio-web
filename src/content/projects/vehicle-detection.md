@@ -1,19 +1,20 @@
 ---
-title: "Vehicle Detection & Classification"
+title: "Vehicle Detection in Low-Visibility CCTV"
 category: "Computer Vision"
-summary: "YOLOv11-based vehicle detection published as IEEE paper—first author contribution to traffic monitoring research."
+summary: "Optimized YOLOv11 for vehicle detection in adverse conditions (rain, fog, low-light). First-author IEEE publication at ICSINTESA 2025 with mAP@0.5 of 0.896 and 122 FPS real-time inference."
 featured: true
 order: 2
 status: "completed"
 problem: |
-  Traditional traffic monitoring systems rely on inductive loops and manual counting, which are expensive to deploy and maintain. A vision-based system could provide richer data at lower cost, but existing models struggle with varied vehicle types in Indonesian traffic conditions.
+  Traffic surveillance systems degrade severely in adverse weather and low-light conditions. Existing models are typically benchmarked on clean, well-lit data—not the noisy, blurry reality of CCTV footage in rain, fog, or at night. A robust detector optimized specifically for these conditions is needed for reliable intelligent transportation systems.
 approach: |
-  Trained YOLOv11 on a custom dataset of Indonesian traffic footage, covering multiple vehicle classes (motorcycles, cars, buses, trucks). Applied data augmentation, hyperparameter tuning, and evaluated against YOLOv8 baseline. Final model deployed as a real-time detection pipeline.
+  Conducted a systematic three-scenario experiment using YOLOv11: first tuning batch size (8, 16, 32), then image resolution (228, 448, 640), and finally optimizer choice (AdamW, SGD, Adam, NAdam, RAdam, RMSProp). Each stage carried forward the best configuration. The custom dataset consisted of 1,070 CCTV images from Yogyakarta intersections and Indonesian toll roads—augmented to 2,570 via flipping, hue shifts, brightness adjustments, blurring, and noise injection to simulate adverse conditions.
 results: |
-  - Published in IEEE Xplore as first author.
-  - YOLOv11 achieved mAP@0.5 improvement over YOLOv8 baseline on the custom dataset.
-  - Real-time inference at 30+ FPS on consumer GPU.
-role: "First author — dataset collection, model training, evaluation, paper writing, and IEEE submission."
+  - Optimal configuration: batch size 16, resolution 640x640, AdamW optimizer.
+  - mAP@0.5: 0.896, mAP@0.5-0.95: 0.678.
+  - Real-time inference at 122 FPS (8.2 ms/img) on NVIDIA RTX 4090.
+  - Published at ICSINTESA 2025 (IEEE) as first author.
+role: "First author — dataset curation, experiment design, model training, evaluation, and paper writing. Co-authors: William Eka Chandra, Rafi Andhika Putra Pratama, Felix Corputty."
 stack:
   - "YOLOv11"
   - "PyTorch"
@@ -26,16 +27,29 @@ links:
 
 ## Model Performance
 
-| Model | mAP@0.5 | mAP@0.5:0.95 | FPS |
-|-------|---------|--------------|-----|
-| YOLOv8 | 0.xxx | 0.xxx | xx |
-| YOLOv11 | 0.xxx | 0.xxx | xx |
+| Metric | Value |
+|---|---|
+| mAP@0.5 | **0.896** |
+| mAP@0.5-0.95 | **0.678** |
+| FPS | **122** (8.2 ms/img) |
+| GPU | NVIDIA RTX 4090 |
 
-> _Exact metrics to be filled from the published paper._
+## Experimental Design
+
+Three sequential scenarios, each carrying forward the best configuration:
+
+| Scenario | Parameter | Values Tested | Best |
+|---|---|---|---|
+| 1 | Batch Size | 8, 16, 32 | **16** |
+| 2 | Image Resolution | 228, 448, 640 | **640×640** |
+| 3 | Optimizer | AdamW, SGD, Adam, NAdam, RAdam, RMSProp | **AdamW** |
+
+Dataset: 1,070 raw images → 2,570 augmented (88% train, 8% val, 4% test). Three vehicle classes: car, bus, truck.
 
 ## Publication
 
-- **Title:** Vehicle Detection and Classification using YOLOv11
-- **Venue:** IEEE Xplore
+- **Title:** Optimizing YOLOv11 for Vehicle Detection in Low-Visibility CCTV Footage
+- **Venue:** ICSINTESA 2025 — 5th International Conference of Science and Information Technology in Smart Administration
+- **Publisher:** IEEE
 - **Year:** 2025
 - **Role:** First Author

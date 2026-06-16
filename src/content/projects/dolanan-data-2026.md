@@ -1,23 +1,25 @@
 ---
-title: "Dolanan Data 2026"
+title: "Dolanan Data Nexus 2026"
 category: "Computer Vision / Segmentation"
-summary: "Swin-FPN semantic segmentation for UAV post-flood mapping—national finalist competition entry."
+summary: "Swin Transformer + FPN for semantic segmentation of post-flood UAV imagery. Top 10 Finalist in a national data mining competition."
 featured: false
 order: 4
 status: "completed"
 problem: |
   Rapid damage assessment after floods requires accurate mapping of affected areas from UAV imagery. Manual annotation is too slow for emergency response timelines.
 approach: |
-  Implemented Swin-FPN architecture for semantic segmentation of post-flood UAV imagery. Trained on competition-provided dataset with data augmentation tailored to aerial perspectives. Model identifies flooded areas, damaged infrastructure, and passable routes.
+  Paired a Swin Transformer backbone with a Feature Pyramid Network (FPN) to capture multi-scale features, enabling semantic segmentation of post-flood UAV imagery and mapping affected land cover areas. Competed in Dolanan Data Nexus 2026, a national data mining competition.
 results: |
-  - National finalist in Dolanan Data 2026 competition.
+  - Top 10 Finalist among teams nationwide, selected for the final round held in Surabaya.
   - Accurate segmentation of flood-affected zones from UAV orthomosaic imagery.
+  - Swin-FPN effectively captured both fine details and large-scale context in aerial views.
 role: "Team member — model implementation, training, and evaluation."
 stack:
   - "Swin Transformer"
   - "FPN"
   - "PyTorch"
-  - "OpenCV"
+  - "Semantic Segmentation"
+  - "UAV Imagery"
   - "Python"
 links:
   github: "#"

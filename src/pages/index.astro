@@ -6,7 +6,7 @@ import { getCollection } from "astro:content";
 const featuredProjects = await getCollection("projects", ({ data }) => data.featured);
 featuredProjects.sort((a, b) => a.data.order - b.data.order);
 const pageTitle = "Home";
-const pageDescription = "ML / AI Engineer with a research edge. IEEE first-author, production AI systems, computer vision. Rudi Firdaus — portfolio.";
+const pageDescription = "Data Science undergraduate at Telkom University. First-author IEEE publication (ICSINTESA 2025), Vice Head of MBC Laboratory (54 assistants). Computer Vision, Data Engineering, MLOps.";
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -25,7 +25,7 @@ const pageDescription = "ML / AI Engineer with a research edge. IEEE first-autho
       </div>
       <div class="text-center sm:text-left">
         <p class="text-sm font-medium uppercase tracking-widest text-accent-600 dark:text-accent-400">
-          {PERSONAL.role}
+          Data Scientist / ML Engineer
         </p>
         <h1 class="mt-2 text-4xl font-extrabold tracking-tight sm:text-5xl">
           {PERSONAL.name}

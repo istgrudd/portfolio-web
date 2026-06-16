@@ -5,28 +5,28 @@ import { RESEARCH, SITE } from "../lib/constants";
 
 <BaseLayout
   title="Research"
-  description="Published IEEE paper on vehicle detection using YOLOv11, and ongoing thesis on traffic flow estimation. First-author research by Rudi Firdaus."
+  description="First-author IEEE publication at ICSINTESA 2025: Optimizing YOLOv11 for Vehicle Detection in Low-Visibility CCTV Footage. mAP@0.5 of 0.896, 122 FPS. By Rudi Firdaus."
 >
   <script type="application/ld+json" set:html={`{
     "@context": "https://schema.org",
     "@type": "ScholarlyArticle",
     "name": "${RESEARCH.paper.title}",
-    "author": {
-      "@type": "Person",
-      "name": "Rudi Firdaus"
-    },
-    "datePublished": "${RESEARCH.paper.year}",
-    "publisher": {
-      "@type": "Organization",
-      "name": "IEEE"
-    },
-    "description": "${RESEARCH.paper.abstract}"
+  "author": {
+    "@type": "Person",
+    "name": "Rudi Firdaus"
+  },
+  "datePublished": "${RESEARCH.paper.year}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "IEEE"
+  },
+  "description": "${RESEARCH.paper.abstract.replace(/"/g, '\\"')}"
   }`} />
 
   <section class="mx-auto max-w-3xl px-4 pb-16 pt-16 sm:px-6 sm:pt-24">
     <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Research</h1>
     <p class="mt-3 max-w-2xl leading-relaxed text-gray-500 dark:text-gray-400">
-      Peer-reviewed publications and academic work at the intersection of computer vision, deep learning, and real-world traffic systems.
+      Peer-reviewed research at the intersection of computer vision, deep learning, and intelligent transportation systems.
     </p>
 
     <!-- Published Paper -->
@@ -50,6 +50,31 @@ import { RESEARCH, SITE } from "../lib/constants";
         <p class="mt-3 leading-relaxed text-gray-600 dark:text-gray-300">
           {RESEARCH.paper.abstract}
         </p>
+      </div>
+
+      <!-- Metrics -->
+      <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div class="rounded-lg border border-gray-200/60 bg-gray-50/50 p-3 text-center dark:border-gray-800/60 dark:bg-gray-900/30">
+          <span class="text-lg font-bold text-accent-600 dark:text-accent-400">{RESEARCH.paper.metrics.mAP50}</span>
+          <p class="mt-0.5 text-xs text-gray-400">mAP@0.5</p>
+        </div>
+        <div class="rounded-lg border border-gray-200/60 bg-gray-50/50 p-3 text-center dark:border-gray-800/60 dark:bg-gray-900/30">
+          <span class="text-lg font-bold text-accent-600 dark:text-accent-400">{RESEARCH.paper.metrics.mAP50_95}</span>
+          <p class="mt-0.5 text-xs text-gray-400">mAP@0.5-0.95</p>
+        </div>
+        <div class="rounded-lg border border-gray-200/60 bg-gray-50/50 p-3 text-center dark:border-gray-800/60 dark:bg-gray-900/30">
+          <span class="text-lg font-bold text-accent-600 dark:text-accent-400">{RESEARCH.paper.metrics.fps}</span>
+          <p class="mt-0.5 text-xs text-gray-400">FPS</p>
+        </div>
+        <div class="rounded-lg border border-gray-200/60 bg-gray-50/50 p-3 text-center dark:border-gray-800/60 dark:bg-gray-900/30">
+          <span class="text-lg font-bold text-accent-600 dark:text-accent-400">{RESEARCH.paper.metrics.latency}</span>
+          <p class="mt-0.5 text-xs text-gray-400">Latency</p>
+        </div>
+      </div>
+
+      <!-- Co-authors -->
+      <div class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+        Co-authors: {RESEARCH.paper.coauthors.join(", ")}
       </div>
 
       <!-- Links -->
@@ -76,7 +101,7 @@ import { RESEARCH, SITE } from "../lib/constants";
     <div class="mt-8 rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
       <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400">Citation</h3>
       <div class="mt-3 rounded-lg bg-gray-50 p-4 font-mono text-sm leading-relaxed text-gray-600 dark:bg-gray-900/50 dark:text-gray-300">
-        R. Firdaus, &ldquo;Vehicle Detection and Classification using YOLOv11,&rdquo; in <em>IEEE Xplore</em>, 2025.
+        R. Firdaus, W. E. Chandra, R. A. P. Pratama, and F. Corputty, &ldquo;Optimizing YOLOv11 for Vehicle Detection in Low-Visibility CCTV Footage,&rdquo; in <em>Proc. 2025 5th Int. Conf. of Science and Information Technology in Smart Administration (ICSINTESA)</em>, IEEE, 2025.
       </div>
     </div>
 
@@ -104,9 +129,9 @@ import { RESEARCH, SITE } from "../lib/constants";
       <!-- Thesis details -->
       <div class="mt-6 grid gap-4 sm:grid-cols-2">
         <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
-          <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400">Supervision</h3>
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400">University</h3>
           <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
-            Department of Electrical Engineering &amp; Information Technology, Universitas Gadjah Mada
+            Telkom University, Bandung — School of Informatics, B.Sc. Data Science
           </p>
         </div>
         <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
