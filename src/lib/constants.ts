@@ -30,45 +30,6 @@ export const NAV_LINKS = [
   { label: "About", href: "/about" },
 ];
 
-export const FEATURED_PROJECTS = [
-  {
-    slug: "screenai",
-    title: "ScreenAI",
-    category: "NLP / Full-stack",
-    summary:
-      "AI-powered recruitment screening system with RAG, NER anonymization, and explainable scoring. FastAPI backend, IndoBERT, ChromaDB, Docker, self-hosted on VPS—staging with 40+ testers.",
-    stack: ["FastAPI", "IndoBERT", "LangChain", "ChromaDB", "Docker", "Tailwind CSS"],
-    links: {
-      github: "#",
-      demo: "#",
-    },
-  },
-  {
-    slug: "vehicle-detection",
-    title: "Vehicle Detection & Classification",
-    category: "Computer Vision",
-    summary:
-      "YOLOv11-based vehicle detection and classification system published as an IEEE paper. First-author contribution to traffic monitoring research.",
-    stack: ["YOLOv11", "PyTorch", "OpenCV", "Python"],
-    links: {
-      github: "#",
-      paper: "#",
-    },
-  },
-  {
-    slug: "thesis-traffic-flow",
-    title: "Traffic Flow Estimation",
-    category: "Computer Vision",
-    summary:
-      "Ongoing thesis extending vehicle detection to traffic flow estimation under low-visibility conditions in Yogyakarta. YOLOv11/v26 + ByteTrack + SMP flow module per PKJI standards.",
-    stack: ["YOLOv11", "ByteTrack", "PyTorch", "OpenCV", "Python"],
-    links: {
-      github: "#",
-    },
-    badge: "In Progress",
-  },
-];
-
 export const RESEARCH = {
   paper: {
     title: "Vehicle Detection and Classification using YOLOv11",

@@ -1,0 +1,58 @@
+---
+import BaseLayout from "../../components/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects", ({ data }) => data);
+projects.sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Projects" description="A curated selection of ML, computer vision, NLP, and full-stack projects by Rudi Firdaus.">
+  <section class="mx-auto max-w-5xl px-4 pb-16 pt-16 sm:px-6 sm:pt-24">
+    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Projects</h1>
+    <p class="mt-3 max-w-2xl text-gray-500 dark:text-gray-400">
+      From research papers to production systems. Each project represents a concrete problem solved with measurable results.
+    </p>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        projects.map((project) => (
+          <a
+            href={`/projects/${project.id.replace(/\.md$/, "")}`}
+            class="group flex flex-col rounded-xl border border-gray-200/60 bg-white p-6 transition hover:border-accent-300 hover:shadow-sm dark:border-gray-800/60 dark:bg-gray-900/50 dark:hover:border-accent-700"
+          >
+            <div class="flex items-start justify-between gap-2">
+              <span class="text-xs font-medium uppercase tracking-wide text-accent-600 dark:text-accent-400">
+                {project.data.category}
+              </span>
+              {
+                project.data.status === "in-progress" && (
+                  <span class="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
+                    In Progress
+                  </span>
+                )
+              }
+            </div>
+            <h2 class="mt-2 text-lg font-semibold group-hover:text-accent-600 dark:group-hover:text-accent-400">
+              {project.data.title}
+            </h2>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+              {project.data.summary}
+            </p>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              {project.data.stack.slice(0, 4).map((tech) => (
+                <span class="rounded-md bg-gray-100 px-2 py-0.5 text-xs text-gray-600 dark:bg-gray-800 dark:text-gray-400">
+                  {tech}
+                </span>
+              ))}
+              {project.data.stack.length > 4 && (
+                <span class="rounded-md bg-gray-100 px-2 py-0.5 text-xs text-gray-400 dark:bg-gray-800 dark:text-gray-500">
+                  +{project.data.stack.length - 4}
+                </span>
+              )}
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
