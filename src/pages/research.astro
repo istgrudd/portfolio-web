@@ -1,0 +1,148 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+import { RESEARCH } from "../lib/constants";
+---
+
+<BaseLayout
+  title="Research"
+  description="Published IEEE paper on vehicle detection using YOLOv11, and ongoing thesis on traffic flow estimation. First-author research by Rudi Firdaus."
+>
+  <section class="mx-auto max-w-3xl px-4 pb-16 pt-16 sm:px-6 sm:pt-24">
+    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Research</h1>
+    <p class="mt-3 max-w-2xl leading-relaxed text-gray-500 dark:text-gray-400">
+      Peer-reviewed publications and academic work at the intersection of computer vision, deep learning, and real-world traffic systems.
+    </p>
+
+    <!-- Published Paper -->
+    <div class="mt-12">
+      <div class="flex items-center gap-3">
+        <span class="rounded-full bg-accent-100 px-3 py-1 text-xs font-semibold text-accent-700 dark:bg-accent-900/40 dark:text-accent-300">
+          Published
+        </span>
+        <span class="text-sm text-gray-400">{RESEARCH.paper.year}</span>
+      </div>
+
+      <h2 class="mt-4 text-2xl font-bold tracking-tight">{RESEARCH.paper.title}</h2>
+
+      <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+        <strong>{RESEARCH.paper.role}</strong> &middot; {RESEARCH.paper.venue}
+      </p>
+
+      <!-- Abstract -->
+      <div class="mt-6 rounded-xl border border-gray-200/60 bg-gray-50/50 p-6 dark:border-gray-800/60 dark:bg-gray-900/30">
+        <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400">Abstract</h3>
+        <p class="mt-3 leading-relaxed text-gray-600 dark:text-gray-300">
+          {RESEARCH.paper.abstract}
+        </p>
+      </div>
+
+      <!-- Links -->
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href={RESEARCH.paper.links.ieee} target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800">
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+          IEEE Xplore
+        </a>
+        {RESEARCH.paper.links.doi && (
+          <a href={RESEARCH.paper.links.doi} target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
+            DOI
+          </a>
+        )}
+        <a href="/projects/vehicle-detection" class="inline-flex items-center gap-1 text-sm font-medium text-accent-600 hover:underline dark:text-accent-400">
+          View project details <span>&rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Citation -->
+    <div class="mt-8 rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
+      <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400">Citation</h3>
+      <div class="mt-3 rounded-lg bg-gray-50 p-4 font-mono text-sm leading-relaxed text-gray-600 dark:bg-gray-900/50 dark:text-gray-300">
+        R. Firdaus, &ldquo;Vehicle Detection and Classification using YOLOv11,&rdquo; in <em>IEEE Xplore</em>, 2025.
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <hr class="my-16 border-gray-200/60 dark:border-gray-800/60" />
+
+    <!-- Thesis -->
+    <div>
+      <div class="flex items-center gap-3">
+        <span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
+          In Progress
+        </span>
+        <span class="text-sm text-gray-400">Undergraduate Thesis</span>
+      </div>
+
+      <h2 class="mt-4 text-2xl font-bold tracking-tight">{RESEARCH.thesis.title}</h2>
+
+      <div class="mt-6 rounded-xl border border-gray-200/60 bg-gray-50/50 p-6 dark:border-gray-800/60 dark:bg-gray-900/30">
+        <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400">Approach</h3>
+        <p class="mt-3 leading-relaxed text-gray-600 dark:text-gray-300">
+          {RESEARCH.thesis.approach}
+        </p>
+      </div>
+
+      <!-- Thesis details -->
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400">Supervision</h3>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+            Department of Electrical Engineering &amp; Information Technology, Universitas Gadjah Mada
+          </p>
+        </div>
+        <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400">Technologies</h3>
+          <div class="mt-2 flex flex-wrap gap-1.5">
+            <span class="rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">YOLOv11</span>
+            <span class="rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">YOLOv26</span>
+            <span class="rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">ByteTrack</span>
+            <span class="rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">PyTorch</span>
+            <span class="rounded-md bg-gray-100 px-2.5 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">OpenCV</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <a href="/projects/traffic-flow-estimation" class="inline-flex items-center gap-1 text-sm font-medium text-accent-600 hover:underline dark:text-accent-400">
+          View project details <span>&rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Research interests -->
+    <hr class="my-16 border-gray-200/60 dark:border-gray-800/60" />
+
+    <div>
+      <h2 class="text-xl font-bold tracking-tight">Research Interests</h2>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
+          <h3 class="font-semibold">Computer Vision for Traffic Systems</h3>
+          <p class="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+            Object detection, multi-object tracking, and traffic parameter estimation from CCTV footage under real-world conditions.
+          </p>
+        </div>
+        <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
+          <h3 class="font-semibold">NLP for Underrepresented Languages</h3>
+          <p class="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+            Indonesian NLP with transformer models, including emotion classification, NER-based anonymization, and RAG systems.
+          </p>
+        </div>
+        <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
+          <h3 class="font-semibold">Explainable AI & Fairness</h3>
+          <p class="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+            SHAP-based model interpretability, evidence-grounded scoring, and transparent decision pipelines in high-stakes applications.
+          </p>
+        </div>
+        <div class="rounded-xl border border-gray-200/60 p-5 dark:border-gray-800/60">
+          <h3 class="font-semibold">Production ML Systems</h3>
+          <p class="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+            Bridging research and deployment: containerization, self-hosted APIs, and scalable RAG architectures on commodity infrastructure.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
