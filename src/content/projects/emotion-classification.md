@@ -6,6 +6,7 @@ summary: "Comparative study of BiLSTM vs IndoBERT for emotion classification on 
 featured: false
 order: 5
 status: "completed"
+thumbnail: "/images/projects/emotion-classification.webp"
 timeframe: "2025"
 problem: |
   Emotion detection in Indonesian social-media text is hard: informal language, code-switching, and limited labeled data. Knowing which architecture works best matters for downstream Indonesian NLP.
