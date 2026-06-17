@@ -7,7 +7,7 @@ featured: false
 order: 6
 status: "completed"
 timeframe: "2026 · course project"
-thumbnail: "/images/projects/emotion-classification.png"
+thumbnail: "/images/projects/emotion-classification.webp"
 metrics:
   - { value: "0.727", label: "best macro F1 (val)" }
   - { value: "5", label: "emotion classes" }
